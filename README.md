@@ -34,7 +34,7 @@ The primary objective of this project is to simulate a cyber-attack, investigate
 
 - **Internal Network Isolation:** Configure both machines to communicate only through an internal network.
 ![Network Configuration Screenshot](./assets/network-topology.png)
-- Go to **Settings > Networking > Select Internal Network**  
+- Go to **Settings > Network > Select Internal Network**  
 ![Network Configuration Screenshot](./assets/internal-network.png)
 - **Static IP Assignment:** Assign static IPv4 addresses to each machine for consistent communication.
 
@@ -50,15 +50,24 @@ The primary objective of this project is to simulate a cyber-attack, investigate
 ### Machine 1: Victim (Windows 10)
 
 1. **Install Splunk Enterprise:**
-   - Download and install Splunk to monitor system activities.
-   - Verify the installation by navigating to `127.0.0.1:8000` and logging in.
+   - Download and install Splunk enterprise to monitor system activities.
+   - Navigate to `http://127.0.0.1:8000`for using splunk and login to your account.
+   ![splunk login](./assets/splunk-login.png)
+   ![splunk login](./assets/splunk-home.png)
 
 2. **Install Sysmon Add-on for Splunk:**
    - Download and install the Sysmon add-on for advanced monitoring.
-   - Copy the add-on directory from `/etc/app` to `/etc/deployment-app`.
+   ![Sysmon addon](./assets/sysmon-addon.png)
+   - Copy `Splunk_TA_microsoft_sysmon` add-on directory from `Splunk/etc/app` to `Splunk/etc/deployment-apps`.
+   ![Sysmon addon app directory](./assets/addonfile.png)
 
 3. **Configure Sysmon:**
-   - Download and configure Sysmon with an XML configuration file for detailed process monitoring.
+Download and configure Sysmon with an XML configuration file for detailed process monitoring.
+   - [Sysmon download link](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+   - [Sysmon configuration file download link](https://github.com/olafhartong/sysmon-modular) 
+   
+         ./sysmon64 -i ./config.xml -accepteula
+
 
 4. **Deactivate Windows Defender:**
    - Temporarily disable Windows Defender to avoid interference with the simulation.
