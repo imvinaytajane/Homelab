@@ -4,7 +4,7 @@
 # Homelab: Attack and Defence Simulation Project
 
 ### Objective
-The primary objective of this project is to simulate a cyber-attack, investigate the attack using Splunk, and remediate it. This documentation covers the setup, configuration, attack simulation, investigation, and remediation steps, providing a thorough demonstration of attack and defence skills in a controlled lab environment.
+The primary objective of this project is to simulate a cyber-attack, investigate the attack using Splunk, and remediate it.
 
 ---
 
