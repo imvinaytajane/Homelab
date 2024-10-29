@@ -149,7 +149,7 @@ Download and configure Sysmon with an XML configuration file for detailed proces
 
 ## Conclusion
 
-This homelab simulation demonstrated a cyber-attack process from setup through remediation, providing a hands-on experience in both offensive and defensive cybersecurity skills. By leveraging tools like Splunk and Sysmon, the investigation traced the attack's behavior, enabling a thorough remediation process to secure the system.
+This homelab project provided a comprehensive experience in simulating and defending against cyber-attacks, covering essential stages from initial setup to post-attack remediation. Through hands-on engagement with tools like VirtualBox, Kali Linux, and Splunk, the project demonstrated critical cybersecurity techniques, including network isolation, attack surface discovery, malware creation, phishing tactics, and incident investigation. Utilizing Splunk and Sysmon to trace attack vectors and remediate vulnerabilities deepened understanding of both offensive and defensive cybersecurity operations, showcasing a complete cycle of attack response. This project highlights the real-world applicability of these skills in protecting and securing digital environments against threats.
 
 ---
 
