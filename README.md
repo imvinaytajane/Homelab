@@ -4,17 +4,18 @@
 # Homelab: Attack and Defence Simulation Project
 
 ### Objective
+
 The primary objective of this project is to simulate a cyber-attack, investigate the attack using Splunk, and remediate it.
 
 ---
 
 ## Project Overview
 
-1. **Stage 1:** Lab Setup
-2. **Stage 2:** Machine Configuration
-3. **Stage 3:** Attack Simulation
-4. **Stage 4:** Investigation and Remediation
-5. **Conclusion**
+- **Stage 1:** Lab Setup
+- **Stage 2:** Machine Configuration
+- **Stage 3:** Attack Simulation
+- **Stage 4:** Investigation and Remediation
+- **Conclusion**
 
 ---
 
@@ -22,25 +23,27 @@ The primary objective of this project is to simulate a cyber-attack, investigate
 
 ### 1. Environment Setup
 
-- **Install VirtualBox** and create two virtual machines.
+- Install VirtualBox and create two virtual machines.
 
     ![Screenshot of Windows 10 VM setup](./assets/virtualbox.png)
-- **Machine 1 (Victim):** Windows 10  
+- **Machine 1 (Victim):** Windows 10 (192.168.100.102)
     ![Screenshot of Windows 10 VM setup](./assets/win10.png)
-- **Machine 2 (Attacker):** Kali Linux  
+- **Machine 2 (Attacker):** Kali Linux (192.169.100.101)
     ![Screenshot of Kali Linux VM setup](./assets/kali.png)
 
 ### 2. Network Configuration
 
-- **Internal Network Isolation:** Configure both machines to communicate only through an internal network.
-![Network Configuration Screenshot](./assets/network-topology.png)
-- Go to **Settings > Network > Select Internal Network**  
+- **Internal Network Isolation:** Configure both machines to communicate only through an internal network. This will help prevent malware from affecting host system.
+
+   ![Network Configuration Screenshot](./assets/network-topology.png )
+- Go to **Settings > Network > Select Internal Network**
+- **Promiscuous Mode:** Allow all
 ![Network Configuration Screenshot](./assets/internal-network.png)
 - **Static IP Assignment:** Assign static IPv4 addresses to each machine for consistent communication.
 
-    - Windows 10 (Victim): 192.168.1.10
+  - Windows 10 (Victim): 192.168.100.101
     ![kali ip](./assets/win10ip.png)
-    - Kali Linux (Attacker): 192.168.1.20  
+  - Kali Linux (Attacker): 192.168.100.102  
     ![Screenshot showing IP assignment on both machines](./assets/kaliip.png)
 
 ---
@@ -64,10 +67,9 @@ The primary objective of this project is to simulate a cyber-attack, investigate
 3. **Configure Sysmon:**
 Download and configure Sysmon with an XML configuration file for detailed process monitoring.
    - [Download Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
-   - [Download Sysmon configuration file](https://github.com/olafhartong/sysmon-modular) 
-   
-         ./sysmon64 -i ./config.xml -accepteula
+   - [Download Sysmon configuration file](https://github.com/olafhartong/sysmon-modular)
 
+         ./sysmon64 -i ./config.xml -accepteula
 
 4. **Deactivate Windows Defender:**
    Temporarily disable Windows Defender to avoid interference with the simulation.
@@ -99,6 +101,7 @@ Download and configure Sysmon with an XML configuration file for detailed proces
 ### Step 1: Launch `msfconsole` on Kali Linux (Attacker Machine)
 
 1. Launch `msfconsole` and configure it to listen for an incoming connection:
+
    ```bash
    msfconsole
    use exploit/multi/handler
@@ -108,13 +111,17 @@ Download and configure Sysmon with an XML configuration file for detailed proces
    options
    exploit
    ```
+
 ![msf consoole](./assets/msfconsole.png)
+
 ### Step 2: Execute the Malware on Windows 10 (Victim Machine)
 
 - Open the malware attachment from the phishing email on the victim machine to initiate a reverse shell connection.
 ![malware running](./assets/malware-runing.png)
+
 ### Step 3: Access the Victim Machine
-- Connection established 
+
+- Connection established
 ![connection establish](./assets/connection.png)
 
 - use `shell` to execute commands on victim machine
@@ -125,6 +132,7 @@ Download and configure Sysmon with an XML configuration file for detailed proces
 ## Stage 4: Investigation and Remediation
 
 ### 1. Investigate with Splunk on Windows 10
+
 - Ran `index="main" resume` to get related logs for malware file
 ![search](./assets/Splunk%20search.png)
 - Ran `index="main" 192.168.100.101` to get all entries going to attacker ip
@@ -133,10 +141,10 @@ Download and configure Sysmon with an XML configuration file for detailed proces
 ![search](./assets/Splunk-first-log.png)
 
 - Below are some findings after Investigating splunk logs
-   - **Malware file:** Resume.pdf.exe
-   - **Destination/Attacker ip:** 192.168.100.101
-   - **Process Id:** 1408
-   - **Attack time:** 28/10/2024 at 4:24 PM
+  - **Malware file:** Resume.pdf.exe
+  - **Destination/Attacker ip:** 192.168.100.101
+  - **Process Id:** 1408
+  - **Attack time:** 28/10/2024 at 4:24 PM
 
 ### 3. Malware Removal and Remediation
 
@@ -152,4 +160,3 @@ Download and configure Sysmon with an XML configuration file for detailed proces
 This homelab project provided a comprehensive experience in simulating and defending against cyber-attacks, covering essential stages from initial setup to post-attack remediation. Through hands-on engagement with tools like VirtualBox, Kali Linux, and Splunk, the project demonstrated critical cybersecurity techniques, including network isolation, attack surface discovery, malware creation, phishing tactics, and incident investigation. Utilizing Splunk and Sysmon to trace attack vectors and remediate vulnerabilities deepened understanding of both offensive and defensive cybersecurity operations, showcasing a complete cycle of attack response. This project highlights the real-world applicability of these skills in protecting and securing digital environments against threats.
 
 ---
-
