@@ -114,8 +114,10 @@ Download and configure Sysmon with an XML configuration file for detailed proces
 - Open the malware attachment from the phishing email on the victim machine to initiate a reverse shell connection.
 ![malware running](./assets/malware-runing.png)
 ### Step 3: Access the Victim Machine
+- Connection established 
+![connection establish](./assets/connection.png)
 
-- Once the malware is executed, access the victim machine via the Meterpreter shell.
+- use `shell` to execute commands on victim machine
   - Execute commands such as `sysinfo`, `hashdump`, and other shell commands to observe system data and activity.
 
 ---
@@ -123,26 +125,24 @@ Download and configure Sysmon with an XML configuration file for detailed proces
 ## Stage 4: Investigation and Remediation
 
 ### 1. Investigate with Splunk on Windows 10
+- Ran `index="main" resume` to get related logs for malware file
+![search](./assets/Splunk%20search.png)
+- Ran `index="main" 192.168.100.101` to get all entries going to attacker ip
+![search](./assets/Splunk-dest_ip.png)
+- Fist log after malware execution
+![search](./assets/Splunk-first-log.png)
 
-- Analyze Sysmon logs in Splunk to trace malware behavior, focusing on:
-  - **Process Creation**
-  - **Network Connections**
-  - **Registry Modifications**
-- Document each log entry to map the attack sequence.  
-  ![Relevant Splunk log screenshot]()
-
-### 2. Investigation Findings
-
-- Document findings, including:
-  - How the attack was executed
-  - Impact on the system
-  - Vulnerabilities that were exploited
+- Below are some findings after Investigating splunk logs
+   - **Malware file:** Resume.pdf.exe
+   - **Destination/Attacker ip:** 192.168.100.101
+   - **Process Id:** 1408
+   - **Attack time:** 28/10/2024 at 4:24 PM
 
 ### 3. Malware Removal and Remediation
 
-- Terminate the malicious process.
-  - ![Task Manager Screenshot displaying malware process]()
-- Delete the malware executable.
+- Terminate the malicious process by `END Task`in Task manager.
+- Delete the malware executable from Download location.
+- Delete phishing mail
 - Check for persistent registry entries or scheduled tasks to ensure complete threat removal.
 
 ---
